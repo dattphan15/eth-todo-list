@@ -33,7 +33,7 @@ Run ```truffle migrate``` in the CLI to execute migrations. Add ``` --reset ``` 
 Client side files.
 
 **index.html**  
-
+Uses twitter bootstrap framework to write the frontend, loader, form, task lists.
 
 **App.js**
 
