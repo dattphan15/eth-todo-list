@@ -1,11 +1,16 @@
 App = {
+  loading: false,
+  contracts: {},
+
   load: async () => {
     await App.loadWeb3()
     await App.loadAccount()
+    await App.loadContract()
+    await App.render()
   },
 
-   // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
-   loadWeb3: async () => {
+  // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
+  loadWeb3: async () => {
     if (typeof web3 !== 'undefined') {
       App.web3Provider = web3.currentProvider
       web3 = new Web3(web3.currentProvider)
@@ -38,9 +43,8 @@ App = {
   },
 
   loadAccount: async () => {
-    // Sets the current blockchain account to the first account in the eth object.
+    // Set the current blockchain account
     App.account = web3.eth.accounts[0]
-    console.log(App.account)
   },
 
   loadContract: async () => {
@@ -91,7 +95,7 @@ App = {
       $newTaskTemplate.find('input')
                       .prop('name', taskId)
                       .prop('checked', taskCompleted)
-                      .on('click', App.toggleCompleted)
+                      // .on('click', App.toggleCompleted)
 
       // Put the task in the correct list
       if (taskCompleted) {
@@ -103,20 +107,6 @@ App = {
       // Show the task
       $newTaskTemplate.show()
     }
-  },
-
-  createTask: async () => {
-    App.setLoading(true)
-    const content = $('#newTask').val()
-    await App.todoList.createTask(content)
-    window.location.reload()
-  },
-
-  toggleCompleted: async (e) => {
-    App.setLoading(true)
-    const taskId = e.target.name
-    await App.todoList.toggleCompleted(taskId)
-    window.location.reload()
   },
 
   setLoading: (boolean) => {
@@ -131,7 +121,6 @@ App = {
       content.show()
     }
   }
-
 }
 
 $(() => {
