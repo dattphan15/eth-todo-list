@@ -33,9 +33,10 @@ Run ```truffle migrate``` in the CLI to execute migrations. Add ``` --reset ``` 
 Client side files.
 
 **index.html**  
-
+Uses twitter bootstrap framework to write the frontend, loader, form, task lists.
 
 **App.js**
+Creates the client side connection to the blockchain using web3 js to read/write data to the app.
 
 <br>
 
